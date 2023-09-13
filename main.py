@@ -47,9 +47,9 @@ def start_game():
         
     continue_game = continues()  #check if human continues
 
-    if continue_game == True:
+    while continue_game == True:
         draw(human)
-        print("You just drew a new card. Now: \n")
+        print("\nYou just drew a new card.")
         human_stillingame = checkoverflow(human,computer,human) #check overflow returns true or false
 
         displaycard(computer,human)
@@ -59,8 +59,8 @@ def start_game():
             continue_game = continues()
         else:  # End game and draw for dealer
             draw_computer(computer,human) #draws for dealer and ends game
-            continue_game = False   
-    elif continue_game == False:
+
+    if continue_game == False:
         draw_computer(computer,human)
     
 
@@ -76,7 +76,7 @@ def sum(x): #sum of array of cards
     return tot
 
 def displaycard(computer,human):
-    print(f"The dealer's first card is [{computer[0]},#]")
+    print(f"\nThe dealer's first card is [{computer[0]},#]")
     print("Your cards are", human)
 
 def continues():  #checks if human continues to play - returns continue_game as true or false
@@ -92,15 +92,16 @@ def checkoverflow(x,computer,human): # check for card values exceeding 21. If ex
         for i in range(len(x)):
             if x[i] == 11:          #if ace encountered, replace with 1 value ace
                 x[i] = 1
+                total = sum(x)  
                 break
-    if total < 21:
-        return True
-    elif total == 21: 
+    if total == 21: 
         if x == human:
             print("\nYou got 21! The dealer will draw now.\n")
         draw_computer(computer,human)
+    elif total < 21:
+        return True
     else:
-        losegame() #bust
+        losegame(human) #bust
 
 def check_ace_pc(computer):
     total = sum(computer)                   
@@ -112,29 +113,30 @@ def check_ace_pc(computer):
         return True #overflown
     
 
-def losegame(): #directly lose the game due to bust
+def losegame(human): #directly lose the game due to bust
     print(f"\nYour cards are: {human}\n")
     print("BUST, you lost!")
     exit()
 
 def draw_computer(computer, human): # draws for computer. And gives power to end_game() depending upon the conclusion.
-    print(f"The dealer draws, the cards are currently: ")
+    print(f"\nThe cards are currently: ")
     print(f"Dealer: {computer}")
-    print(f"Human: {human}")
-
+    print(f"Human: {human}\n")
     compsum = sum(computer)
     if compsum > 21:
-        wingame()
+        wingame(computer)
     elif compsum >= 17:
         end_game(computer,human)
     else:
         draw(computer)
+        print("*The dealer draws*")
         overflow = check_ace_pc(computer)
         if overflow == True:
-            wingame()
+            wingame(computer)
         draw_computer(computer,human)
 
-def wingame(): #dealer got bust, human wins
+def wingame(computer): #dealer got bust, human wins
+    print(f"\nThe dealer's cards are: {computer}\n")
     print("The dealer got BUST! You won!")
     exit()
 
@@ -143,10 +145,12 @@ def end_game(computer,human):
     human_total = sum(human)
     if dealer_total > human_total:
         print("The dealer won!")
+        exit()
     elif human_total > dealer_total:
-        print("You won, congrats!")
+        print("\nYou won, congrats!")
         exit()
     elif dealer_total == human_total:
         print("It's a draw!")
+        exit()
 
 start_game()
