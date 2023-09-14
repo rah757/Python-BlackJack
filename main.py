@@ -18,10 +18,11 @@
 #   http://blackjack-final.appbrewery.repl.run
 
 import random
+import logo
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 def start_game():
-    
+    print(logo.logo)
     computer = []
     human = []
     human_total = 0
