@@ -4,6 +4,10 @@
 
 The Python BlackJack project was created during the 11th day of the [100 Days of Code](https://www.udemy.com/course/100-days-of-code/) challenge. It's a console-based implementation of the classic card game Blackjack. The game simulates a player competing against a computer dealer.
 
+## Screenshots
+![image](https://github.com/rah757/Python-BlackJack/assets/69799424/f18fef77-085d-4e34-a90b-4f4b7a8ac6d5)
+
+
 ## How to Play
 
 1. Run the game by executing the Python script.
